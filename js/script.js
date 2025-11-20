@@ -24,13 +24,30 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ページトップボタン
 // ========================================
 const pageTop = document.getElementById('pageTop');
+let scrollTimer = null;
 
 window.addEventListener('scroll', function() {
+    // スクロール中は非表示にする
     if (window.scrollY > 300) {
-        pageTop.classList.add('show');
+        pageTop.classList.add('scrolling');
+        pageTop.classList.remove('show');
     } else {
         pageTop.classList.remove('show');
+        pageTop.classList.remove('scrolling');
     }
+
+    // 既存のタイマーをクリア
+    if (scrollTimer !== null) {
+        clearTimeout(scrollTimer);
+    }
+
+    // スクロール停止後に再表示
+    scrollTimer = setTimeout(function() {
+        if (window.scrollY > 300) {
+            pageTop.classList.remove('scrolling');
+            pageTop.classList.add('show');
+        }
+    }, 150); // 150ms後にスクロール停止と判定
 });
 
 pageTop.addEventListener('click', function() {

@@ -942,6 +942,11 @@ textarea {
     visibility: visible;
 }
 
+.page-top.scrolling {
+    opacity: 0;
+    visibility: hidden;
+}
+
 .page-top:hover {
     background: var(--accent-color);
     transform: translateY(-5px);
